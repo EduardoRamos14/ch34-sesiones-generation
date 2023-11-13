@@ -46,3 +46,31 @@ const potencia = function (base, potencia){ //funcion anonima (no tiene nombre)
 };
 console.log(potencia(2,3));
 
+//----------------------Funciones Autoinvocadas-------------------------------//
+/**se autoinvoca, no necesita llamado
+ * se peuden definir con funciones anonimas
+ */
+(function setUp(){
+    console.log("Me autoinvoco");
+    console.log("Puedo servir como inicializador de tu programa");
+})();
+
+
+//----------------------Funciones Flecha (arrow function)-------------------------------//
+/**
+ * son similares a las funciones expresadas, pero
+ * no requieren la palabra function
+ * si tiene una sola instruccion no requiere las llaves{}
+ * si la instruccion es el mismo retorno no requiere palabra return
+ */
+
+
+// Area de rectangulo con funcion expresada
+const areaRectangulo = function (a, b){
+    return (a*b)
+}
+console.log(areaRectangulo(10,6));
+
+//arrow function
+const area = (b,a) => b*a; 
+console.log(area(3,2));
