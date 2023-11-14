@@ -1,6 +1,6 @@
 console.log("Sesion JS02 - funciones");
 
-//----------------------Declaracion de funciones-------------------------------//
+//----------------------Funciones declaradas-------------------------------//
 
 /*
 Una de las caracteristicas de las funciones es que tienen hosting(pueden ser llamadas antes de ser declaradas)*/ 
@@ -55,6 +55,9 @@ console.log(potencia(2,3));
     console.log("Puedo servir como inicializador de tu programa");
 })();
 
+(function inicializacion(config){
+  console.log("Me inicio con la configuracion " + config)
+})("Api de prueba");
 
 //----------------------Funciones Flecha (arrow function)-------------------------------//
 /**
@@ -74,3 +77,156 @@ console.log(areaRectangulo(10,6));
 //arrow function
 const area = (b,a) => b*a; 
 console.log(area(3,2));
+
+
+
+//----------------------Parametros Default-------------------------------//
+const saludoGeneration= (persona="persona", cohorte="cohorte") => `Hola ${persona}, que gusto que estes en la corte ${cohorte}`;
+
+console.log(saludoGeneration("Jhoseph", "Ch-34"));
+console.log(saludoGeneration());
+
+
+//----------------------Rest Parametros-------------------------------//
+/**
+ * Nos permite representar una serie de valores indefinidos en los argumentos
+ * estos se presentan como un array
+ * el rest parameter debe estar al final de la lista de parametros
+ */
+
+
+/*
+const sumatoriaVariosNumeros = ( a , b , ...manyMoreArgs) => {
+  let suma;
+  suma = a + b;
+  suma += manyMoreArgs.reduce(  (accumulator, currentValue)=> accumulator+currentValue, 0 );
+  return suma;
+}
+*/
+
+const sumatoriaVariosNumeros = (a,b,...manyMoreArgs) => {
+  let suma;
+  suma = a+b;
+
+  for (let i = 0; i < manyMoreArgs.length; i++) {
+    console.log(manyMoreArgs[i]);
+    suma += manyMoreArgs[i];
+  }
+
+  return suma;
+}
+
+console.log(`Sumatoria de dos numeros 4 + 6 = ${sumatoriaVariosNumeros(4,6)}`);
+console.log(`Sumatoria de dos numeros es = ${sumatoriaVariosNumeros(4,6,3,4,6,4,5)}`);
+
+
+
+//----------------------Rest Parametros-------------------------------//
+/**
+ * Funcion que se pasa a otra funcion como argumento, para luego invocarla para completar algun tipo de rutina o accion
+ */
+
+/*
+Realizar 3 funciones.
+  1 función que reciba un mensaje e imprima en consola
+  1 función que reciba un mensaje e imprima en alert
+  1 función que reciba un mensaje e imprima en el DOM, en H2
+*/
+
+const printToConsole= (mensaje)=>console.log (mensaje);
+printToConsole('printToConsole');
+
+const printToAlert= (mensaje)=>alert(mensaje);
+//printToAlert('printToAlert');
+
+
+const getH2Message = ()=> document.getElementById("mensaje");//funcion que obtiene el id de html
+const printToH2= (mensaje)=>{
+  const refH2 = getH2Message();
+  refH2.innerHTML = mensaje;
+}
+printToH2('printToH2');
+
+//----------------------ejercicio-------------------------------//
+
+let numeros = [5, 10, 15, 20, 25];
+const doblenumbers=[];
+
+//For
+const doblarNumeros = (numeros)=> {
+  for (let i = 0; i < numeros.length; i++) {
+    doblenumbers.push(numeros[i]*2);
+  }
+  return doblenumbers
+}
+console.log(doblarNumeros(numeros));
+
+
+// Usando callback con map
+
+const fncCallBackforMap = (element, index, array) => element * 2;
+const dobleUsingMap = (array) => array.map( fncCallBackforMap );
+              //[5, 10, 15, 20, 25];
+console.log( dobleUsingMap( numeros) ); // [10, 20, 30, 40, 50]
+
+const doubleUsingMapAndArrowFunction = (array) => array.map( element => element * 2 );
+console.log( doubleUsingMapAndArrowFunction(numeros) ); // [10, 20, 30, 40, 50]
+
+/*
+  Ejercicio 4
+  Crear un programa que itere sobre dos arreglos;
+  si hay cursos en común, imprimirlos en la consola.
+
+  salida: "Cursos en común: Programming, Music"
+*/
+
+const student1Courses = ["Math", "English", "Programming", "Biology", "Physics", "Music"];
+const student2Courses = ["Geography", "Spanish", "Programming", "Music"];
+const student3Courses = ["Math","Geography", "Spanish", "Programming", "Music"];
+
+const cursosEnComun =(student1Courses, student2Courses)=>{
+  const commonCourses=[];
+  for (let i = 0; i < student1Courses.length; i++) {
+    for (let j = 0; j < student2Courses.length; j++) {
+      if(student1Courses[i] === student2Courses[j]){
+        commonCourses.push(student1Courses[i]);
+      }
+    }
+  }
+return commonCourses;
+}
+console.log(`Cursos en común: ${cursosEnComun( student1Courses, student2Courses )}`)
+
+// Resolviendo el ejercicio usando el método filter() y el método includes()
+const commonCoursesUsingFilter = ( student1, student2) => student1.filter( course => student2.includes( course ));
+console.log(`Cursos en común: ${ commonCoursesUsingFilter( student1Courses, student2Courses ) }`);
+
+// Comparando 3 arreglos de cursos
+const commonCoursesStudent1And2 = commonCoursesUsingFilter( student1Courses, student2Courses );
+const commonCoursesStudet1And2And3 = commonCoursesUsingFilter( commonCoursesStudent1And2, student3Courses );
+console.log(`Cursos en común: ${ commonCoursesStudet1And2And3 }`);
+
+  let cursosComunes = student1Courses.filter(curso => student2Courses.includes(curso));
+  console.log(cursosComunes);
+
+
+  // ------------------- Contar la cantidad de caracteres de una frase -----------
+// pepe pecas pica papas con un pico y una pala
+// la cantidad de letras 'p': 8
+// resolverlo usando arrow function
+
+const contarLetrasP = (frase) => {
+  const arregloCaracteres = frase.split('');// Convertir la cadena en un arreglo de caracteres
+  const letrasP = arregloCaracteres.filter((letra) => letra === 'p');// Filtrar los caracteres 'p'
+  const cantidadP = letrasP.length;// Obtener la cantidad de letras 'p'
+  return cantidadP;
+};
+
+const frase = "pepe pecas pica papas con un pico y una pala";
+const cantidadLetrasP = contarLetrasP(frase);
+console.log(`La cantidad de letras 'p': ${cantidadLetrasP}`);
+
+//--------------------
+const phrase = "pepe pecas pica papas con un pico y una pala";
+const countChar = (phrase, character) => phrase.split("").filter( element => element === character ).length;
+console.log( countChar( phrase, "p"));
