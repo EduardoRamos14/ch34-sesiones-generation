@@ -1,9 +1,11 @@
 console.log("Sesion JS02 - funciones");
 
-//----------------------Funciones declaradas-------------------------------//
-
+// ---------------- Función declarada, funciones definidas-------------
+//    ( function declaration, function statement)
 /*
-Una de las caracteristicas de las funciones es que tienen hosting(pueden ser llamadas antes de ser declaradas)*/ 
+  Una de las características de las funcioens declaradas
+  es que tienen hoisting (pueden ser llamadas antes de su declaració).
+*/
 
 multiplicar(5,3);//15
 
@@ -104,6 +106,11 @@ const sumatoriaVariosNumeros = ( a , b , ...manyMoreArgs) => {
 }
 */
 
+//----------------------Rest Parametros-------------------------------//
+/**
+ * Funcion que se pasa a otra funcion como argumento, para luego invocarla para completar algun tipo de rutina o accion
+ */
+
 const sumatoriaVariosNumeros = (a,b,...manyMoreArgs) => {
   let suma;
   suma = a+b;
@@ -121,12 +128,13 @@ console.log(`Sumatoria de dos numeros es = ${sumatoriaVariosNumeros(4,6,3,4,6,4,
 
 
 
-//----------------------Rest Parametros-------------------------------//
-/**
- * Funcion que se pasa a otra funcion como argumento, para luego invocarla para completar algun tipo de rutina o accion
- */
 
+
+// ---------------- Funciones de callback -------------
 /*
+  Función que se pasa a otra función como argumento, para
+  luego invocarla para complementar algún tipo de rutina o acción.
+
 Realizar 3 funciones.
   1 función que reciba un mensaje e imprima en consola
   1 función que reciba un mensaje e imprima en alert
@@ -230,3 +238,72 @@ console.log(`La cantidad de letras 'p': ${cantidadLetrasP}`);
 const phrase = "pepe pecas pica papas con un pico y una pala";
 const countChar = (phrase, character) => phrase.split("").filter( element => element === character ).length;
 console.log( countChar( phrase, "p"));
+
+
+//---------------------------------------Funciones Recursivas---------------------------------------
+// ------------------- Funciones Recursivas -----------
+/*
+  Es una técnica de programación en donde la función se llama así misma.
+  Se debe tener precausión de no entrar en un ciclo infinito.
+
+  En algunos casos, la recursividad puede ser más legible y clara
+  ya que refleja de manera directa la naturaleza recursiva del problema.
+
+  function funcionRecursiva ( valor ){
+    if( condicionParo ){
+
+    } else {
+        funcionRecursiva( nuevoValor ); // llamada recursiva
+    }
+  }
+
+*/
+
+const factorial = (valor)=>{
+  let total=1
+  for (let i = 1; i <=valor; i++) {
+      total=total*i;
+      console.log(total);
+  }
+  return total;
+}
+console.log("El factorial de 5 es: "+ factorial(5));
+
+
+function factorialRecursivo ( number ) {
+  if( number < 1 ){
+    return 1;
+  } else {
+      return number * factorialRecursivo( number - 1 );
+  }
+}
+
+console.log(`Factorial recursivo de 5: ${factorialRecursivo(5)}`);
+
+/*
+Calcular suma de números pares.
+Realizar una función recursiva que sume los números pares
+de un número determinado, hasta el número 1.
+
+número: 12.
+Resultado: 12 + 10 + 8 + 6 + 4 + 2 
+
+número: 7
+Resultado: 6 + 4 + 2 
+
+Recomendación: usar módulo %2
+*/
+
+const sumaNumerosParesRecursiva=(numero)=>{
+  if (numero <= 0) {
+      return 0;
+  }
+  if (numero % 2 === 0) {
+      return numero + sumaNumerosParesRecursiva(numero - 2);
+  } else {
+      return sumaNumerosParesRecursiva(numero - 1);
+  }
+}
+
+console.log(`Resultado para número 12: ${sumaNumerosParesRecursiva(12)}`);
+console.log(`Resultado para número 7: ${sumaNumerosParesRecursiva(7)}`);
