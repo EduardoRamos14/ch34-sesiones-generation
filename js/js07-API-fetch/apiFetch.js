@@ -26,11 +26,11 @@ const getProducts = ( url ) =>{
     // .catch() se ejecuta en caso de que la promesa sea rechazada.
     fetch( urlFakeStore )
      .then(  (response)=>{ 
-        console.log(response);
+       // console.log(response);
         return response.json(); // promesa coversión de JSON a Object
      })
      .then( (products) =>{
-        console.log(products);
+       // console.log(products);
      })
 }
 
